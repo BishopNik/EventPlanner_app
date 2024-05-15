@@ -119,3 +119,29 @@ export const IconClear = styled(Icon)`
 		stroke: red;
 	}
 `;
+
+export const ButtonBox = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const ButtonRefresh = styled.button`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 150px;
+	height: 40px;
+	border-radius: 12px;
+	background-color: lightgoldenrodyellow;
+	box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.25);
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	transition: box-shadow 0.3s, background-color 0.3s, color 0.3s;
+
+	&:hover {
+		background-color: aquamarine;
+		box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4);
+	}
+`;

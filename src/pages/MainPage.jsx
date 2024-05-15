@@ -17,6 +17,8 @@ import {
 	SortText,
 	ButtonClear,
 	IconClear,
+	ButtonBox,
+	ButtonRefresh,
 } from 'components/styled.components/MainPage.styled';
 
 const MainPage = () => {
@@ -133,9 +135,11 @@ const MainPage = () => {
 				))}
 			</MainContainer>
 			{error && (
-				<button type='button' onClick={handlerRefresh}>
-					Refresh
-				</button>
+				<ButtonBox>
+					<ButtonRefresh type='button' onClick={handlerRefresh}>
+						Refresh
+					</ButtonRefresh>
+				</ButtonBox>
 			)}
 		</main>
 	);
