@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { Form, Field, ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
 
 export const MainTitle = styled.h1`
 	margin: 40px auto;
