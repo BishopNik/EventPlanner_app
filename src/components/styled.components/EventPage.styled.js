@@ -23,6 +23,11 @@ export const DataContainer = styled.ul`
 	}
 `;
 
+export const ButtonBox = styled.div`
+	display: flex;
+	gap: 30px;
+`;
+
 export const ButtonStyled = styled.button`
 	display: flex;
 	justify-content: center;
@@ -49,7 +54,7 @@ export const ButtonStyled = styled.button`
 	}
 `;
 
-export const EventInfoContainer = styled.div`
+export const EventInfoContainer = styled.ul`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -76,7 +81,7 @@ export const SearchContainer = styled.li`
 	padding: 20px;
 `;
 
-export const EventDetail = styled.p`
+export const EventDetail = styled.li`
 	font-size: 18px;
 `;
 

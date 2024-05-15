@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useContext, useEffect } from 'react';
 
-import { MainContext, fetchEvents } from 'components/Helpers';
+import { MainContext, fetchEvents } from 'helpers';
 import Loader from 'components/Loader';
 import {
 	MainTitle,

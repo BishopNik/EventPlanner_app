@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Formik, Field } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import { registerSchema } from 'components/Helpers';
+import { useNavigate, useParams } from 'react-router-dom';
+import { registerSchema } from 'helpers';
 import {
 	MainTitle,
 	FormStyled,
@@ -17,18 +17,31 @@ import {
 	ButtonStyled,
 	ErrorMes,
 } from 'components/styled.components/RegisterPage.styled';
+import { registerMember } from 'helpers/fetchMembers';
 
 const RegisterPage = () => {
 	const navigate = useNavigate();
+	const { event } = useParams();
 
 	const goBack = () => {
 		navigate(-1);
 	};
 
-	const handleFormSubmit = (values, { setSubmitting }) => {
-		setSubmitting(false);
+	const handleFormSubmit = async (values, { setSubmitting }) => {
+		const data = await registerMember({ ...values, event });
 
-		goBack();
+		if (data?.name !== 'AxiosError') {
+			navigate(`/${event}`);
+		}
+		setSubmitting(false);
+	};
+
+	const getCurrentDate = () => {
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = String(today.getMonth() + 1).padStart(2, '0');
+		const day = String(today.getDate()).padStart(2, '0');
+		return `${year}-${month}-${day}`;
 	};
 
 	return (
@@ -63,7 +76,12 @@ const RegisterPage = () => {
 						</FieldContainer>
 						<FieldContainer>
 							Date of birth
-							<FieldStyled type='date' name='dateBth' style={{ cursor: 'pointer' }} />
+							<FieldStyled
+								type='date'
+								name='dateBth'
+								style={{ cursor: 'pointer' }}
+								max={getCurrentDate()}
+							/>
 							<ErrorMes name='dateBth' component='span' />
 						</FieldContainer>
 						<HearSection>

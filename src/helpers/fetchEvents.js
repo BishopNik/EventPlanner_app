@@ -3,11 +3,13 @@
 import axios from 'axios';
 import { toastError } from './toastwindow';
 
-axios.defaults.baseURL = 'https://kudago.com/public-api/v1.4/events';
+const kudagoAPI = axios.create({
+	baseURL: 'https://kudago.com/public-api/v1.4/events',
+});
 
 export const fetchEvents = async page => {
 	try {
-		const eventsList = await axios.get(
+		const eventsList = await kudagoAPI.get(
 			`/?lang=en&location=new-york&page=${page}&expand=place,location,dates,title,favorites_count&fields=id,place,location,dates,title,favorites_count`
 		);
 		return eventsList.data;
@@ -19,7 +21,7 @@ export const fetchEvents = async page => {
 
 export const fetchEvent = async id => {
 	try {
-		const eventsList = await axios.get(`/${id}/?lang=en`);
+		const eventsList = await kudagoAPI.get(`/${id}/?lang=en`);
 		return eventsList.data;
 	} catch (error) {
 		toastError('Error loading events');

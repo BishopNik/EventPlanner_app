@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { createContext, useState, useEffect } from 'react';
-import { fetchEvents } from 'components/Helpers';
+import { fetchEvents } from 'helpers';
 
 export const MainContext = createContext();
 

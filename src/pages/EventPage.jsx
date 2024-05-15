@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import debounce from 'lodash.debounce';
-import { fetchEvent } from 'components/Helpers';
+import { fetchEvent } from 'helpers';
 
 import {
 	MainTitle,
@@ -21,20 +21,21 @@ import {
 	MemberListInfoTitle,
 	ButtonReset,
 	IconClose,
+	ButtonBox,
 } from 'components/styled.components/EventPage.styled';
+import { fetchMembers } from 'helpers/fetchMembers';
 
 function EventPage() {
 	const navigate = useNavigate();
 	const { event } = useParams();
 	const [eventData, setEventData] = useState(null);
-	const [memberList, setMemberList] = useState([
-		{ name: 'qwerty', email: 'qw@qw.qw' },
-		{ name: 'asdfg', email: 'as@as.as' },
-		{ name: 'zxcvb', email: 'zx@zx.zx' },
-		{ name: 'tyuiop', email: 'ty@tt.yy' },
-	]);
+	const [memberList, setMemberList] = useState([]);
 	const [nameMember, setNameMember] = useState('');
 	const [emailMember, setEmailMember] = useState('');
+
+	const goHome = () => {
+		navigate('/');
+	};
 
 	const goBack = () => {
 		navigate(-1);
@@ -60,7 +61,7 @@ function EventPage() {
 		}
 	};
 
-	const debouncedHandlerChange = debounce((id, value) => handlerChange(id, value), 150);
+	const debouncedHandlerChange = debounce((id, value) => handlerChange(id, value), 100);
 
 	const onChange = ({ target: { id, value } }) => {
 		debouncedHandlerChange(id, value);
@@ -76,6 +77,10 @@ function EventPage() {
 			}
 		})();
 	}, [event, navigate]);
+
+	useEffect(() => {
+		fetchMembers(event).then(data => setMemberList(data));
+	}, [event]);
 
 	return (
 		eventData && (
@@ -101,59 +106,68 @@ function EventPage() {
 								{moment(eventData?.dates[0].end * 1000).format('HH:MM DD.MM.YYYY')}
 							</EventDetail>
 						</EventInfoContainer>
-						<ButtonStyled type='button' onClick={goBack}>
-							Back
-						</ButtonStyled>
+						<ButtonBox>
+							<ButtonStyled type='button' onClick={goHome}>
+								Home
+							</ButtonStyled>
+							<ButtonStyled type='button' onClick={goBack}>
+								Back
+							</ButtonStyled>
+						</ButtonBox>
 					</li>
 					<MemberListContainer>
-						<SearchContainer>
-							<li>
+						<ul>
+							<SearchContainer>
 								<IconClose name='filters' />
-							</li>
-							<li>
 								<SearchField
 									id='name'
 									type='text'
 									placeholder='member name'
 									onChange={onChange}
 									value={nameMember}
+									disabled={!memberList.length}
 								/>
-							</li>
-							<li>
 								<SearchField
 									id='email'
 									type='text'
 									placeholder='email'
 									onChange={onChange}
 									value={emailMember}
+									disabled={!memberList.length}
 								/>
-							</li>
-							<li>
 								<ButtonReset type='button' onClick={handlerReset}>
 									❌
 								</ButtonReset>
+							</SearchContainer>
+							<li>
+								<MemberList>
+									{memberList
+										.filter(
+											member =>
+												member.name
+													.toLowerCase()
+													.includes(nameMember.toLowerCase()) &&
+												member.email
+													.toLowerCase()
+													.includes(emailMember.toLowerCase())
+										)
+										.map((member, idx) => (
+											<li key={idx}>
+												<MemberListInfo>
+													<MemberListInfoTitle>Name:</MemberListInfoTitle>{' '}
+													{member.name}
+												</MemberListInfo>
+												<MemberListInfo>
+													<MemberListInfoTitle>
+														Email:
+													</MemberListInfoTitle>{' '}
+													{member.email}
+												</MemberListInfo>
+											</li>
+										))}
+								</MemberList>
 							</li>
-						</SearchContainer>
-						<MemberList>
-							{memberList
-								.filter(
-									member =>
-										member.name.includes(nameMember) &&
-										member.email.includes(emailMember)
-								)
-								.map((member, idx) => (
-									<li key={idx}>
-										<MemberListInfo>
-											<MemberListInfoTitle>Name:</MemberListInfoTitle>{' '}
-											{member.name}
-										</MemberListInfo>
-										<MemberListInfo>
-											<MemberListInfoTitle>Email:</MemberListInfoTitle>{' '}
-											{member.email}
-										</MemberListInfo>
-									</li>
-								))}
-						</MemberList>
+						</ul>
 					</MemberListContainer>
 				</DataContainer>
 			</main>

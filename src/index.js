@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from 'components/App';
-import { Context } from 'components/Helpers';
-import { GlobalStyle } from 'components/Helpers/GlobalStyle';
+import { Context } from 'helpers';
+import { GlobalStyle } from 'helpers/GlobalStyle';
 import 'modern-normalize';
 import { Toaster } from 'react-hot-toast';
 
