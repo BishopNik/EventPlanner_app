@@ -170,6 +170,9 @@ function EventPage() {
 						</ul>
 					</MemberListContainer>
 				</DataContainer>
+				<div>
+					<h2>Bar chart</h2>
+				</div>
 			</main>
 		)
 	);
