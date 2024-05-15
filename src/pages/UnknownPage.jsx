@@ -1,14 +1,15 @@
 /** @format */
 
 import { useNavigate } from 'react-router-dom';
+import { MainTitle, GoBack } from 'components/styled.components/UnknownPage.styled';
 
 const UnknownPage = () => {
- const navigate = useNavigate();
+	const navigate = useNavigate();
 	return (
-		<div>
-			<h1>Ups... Page not found.</h1>
-			<button onClick={() => navigate(-1)}>{'Back'}</button>
-		</div>
+		<main>
+			<MainTitle>Ups... Event not found.</MainTitle>
+			<GoBack onClick={() => navigate('/')}>{'Back'}</GoBack>
+		</main>
 	);
 };
 

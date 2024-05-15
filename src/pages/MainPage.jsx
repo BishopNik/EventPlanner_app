@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 
 import { MainContext, fetchEvents } from 'components/Helpers';
 import Loader from 'components/Loader';
@@ -12,6 +12,11 @@ import {
 	LinkStyled,
 	Title,
 	TitleText,
+	SortContainer,
+	SortSelect,
+	SortText,
+	ButtonClear,
+	IconClear,
 } from 'components/styled.components/MainPage.styled';
 
 const MainPage = () => {
@@ -27,6 +32,31 @@ const MainPage = () => {
 		error,
 		setError,
 	} = useContext(MainContext);
+	const [sortKey, setSortKey] = useState('');
+
+	const changeSortValue = ({ target: { value } }) => setSortKey(value);
+
+	const sortEventsList = () => {
+		if (!sortKey) {
+			return [...eventsList];
+		}
+
+		return [...eventsList]?.sort((m1, m2) => {
+			switch (sortKey) {
+				case 'title':
+					return m1.title.localeCompare(m2.title);
+				case 'location':
+					return m1.place?.title.localeCompare(m2.place?.title);
+				case 'favorites':
+					return m2.favorites_count - m1.favorites_count;
+				case 'date':
+					return new Date(m1.dates[0].start_date) - new Date(m2.dates[0].start_date);
+
+				default:
+					return 0;
+			}
+		});
+	};
 
 	const handleScroll = useCallback(() => {
 		if (
@@ -61,15 +91,32 @@ const MainPage = () => {
 		<main>
 			{isLoading && <Loader />}
 			<MainTitle>NY Celebrations</MainTitle>
+			<SortContainer>
+				<SortText>Sort by:</SortText>
+				<SortSelect id='sort' onChange={changeSortValue} value={sortKey}>
+					<option value=''>------</option>
+					<option value='title'>Title</option>
+					<option value='location'>Location</option>
+					<option value='favorites'>Favorites</option>
+					<option value='date'>Start Date</option>
+				</SortSelect>
+				{sortKey && (
+					<ButtonClear type='button' onClick={() => setSortKey('')}>
+						<IconClear name='close' />
+					</ButtonClear>
+				)}
+			</SortContainer>
 			<MainContainer>
-				{eventsList?.map(({ id, title, place, location, dates }) => (
+				{sortEventsList().map(({ id, title, place, location, dates, favorites_count }) => (
 					<EventContainer key={id}>
 						<Title>Title: </Title>
 						<TitleText>{title}</TitleText>
 						<Title>Location: </Title>
 						<TitleText>
-							{location?.slug} {place?.title}
+							{place?.title} {location?.name}
 						</TitleText>
+						<Title>Favorites: </Title>
+						<TitleText>{favorites_count}</TitleText>
 						<Title>Date: </Title>
 						<TitleText style={{ marginBottom: 'auto' }}>
 							{dates[0].start_date} - {dates[0].end_date}

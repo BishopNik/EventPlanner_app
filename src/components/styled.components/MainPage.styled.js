@@ -2,9 +2,10 @@
 
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Icon from 'components/Icon';
 
 export const MainTitle = styled.h1`
-	margin: 40px auto 0 auto;
+	margin: 40px auto;
 	text-align: center;
 	font-size: 36px;
 
@@ -31,7 +32,7 @@ export const EventContainer = styled.li`
 
 	min-width: 300px;
 	width: 330px;
-	height: 300px;
+	height: 320px;
 `;
 
 export const ButtonContainer = styled.ul`
@@ -46,7 +47,7 @@ export const Title = styled.p`
 `;
 
 export const TitleText = styled.p`
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 `;
 
 export const LinkStyled = styled(Link)`
@@ -70,5 +71,51 @@ export const LinkStyled = styled(Link)`
 		background-color: aquamarine;
 		color: darkblue;
 		box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.4);
+	}
+`;
+
+export const SortContainer = styled.label`
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	width: 330px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: 5%;
+	font-size: 20px;
+`;
+
+export const SortSelect = styled.select`
+	width: 230px;
+	height: 50px;
+	padding: 10px;
+	border-radius: 8px;
+	cursor: pointer;
+`;
+
+export const SortText = styled.span`
+	font-size: 20px;
+	font-weight: 600;
+`;
+
+export const ButtonClear = styled.button`
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	right: 25px;
+`;
+
+export const IconClear = styled(Icon)`
+	width: 18px;
+	height: 18px;
+	stroke: black;
+	cursor: pointer;
+
+	&:hover {
+		stroke: red;
 	}
 `;

@@ -8,7 +8,7 @@ axios.defaults.baseURL = 'https://kudago.com/public-api/v1.4/events';
 export const fetchEvents = async page => {
 	try {
 		const eventsList = await axios.get(
-			`/?lang=en&location=new-york&page=${page}&expand=place,location,dates&fields=id,place,location,dates,title`
+			`/?lang=en&location=new-york&page=${page}&expand=place,location,dates,title,favorites_count&fields=id,place,location,dates,title,favorites_count`
 		);
 		return eventsList.data;
 	} catch (error) {

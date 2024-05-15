@@ -16,7 +16,7 @@ function App() {
 				<Route index path='/' element={<MainPage />} />
 				<Route path='/:event' element={<EventPage />} />
 				<Route path='/reg/:event' element={<RegisterPage />} />
-				<Route path='*' element={<UnknownPage />} />
+				<Route path='/empty' element={<UnknownPage />} />
 			</Route>
 		</Routes>
 	);

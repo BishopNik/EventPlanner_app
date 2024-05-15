@@ -1,6 +1,7 @@
 /** @format */
 
 import styled from 'styled-components';
+import Icon from 'components/Icon';
 
 export const MainTitle = styled.h1`
 	margin: 40px auto;
@@ -16,7 +17,6 @@ export const DataContainer = styled.ul`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	align-items: center;
 
 	@media screen and (min-width: 768px) {
 		flex-direction: row;
@@ -28,7 +28,7 @@ export const ButtonStyled = styled.button`
 	justify-content: center;
 	align-items: center;
 	width: 100px;
-	height: 40px;
+	height: 20px;
 	border: none;
 	border-radius: 12px;
 	font-size: 20px;
@@ -45,6 +45,89 @@ export const ButtonStyled = styled.button`
 
 	@media screen and (min-width: 768px) {
 		width: 140px;
-		height: 50px;
+		height: 30px;
 	}
+`;
+
+export const EventInfoContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	min-width: 300px;
+	margin-bottom: 30px;
+	padding: 20px;
+	border: 1px solid black;
+	border-radius: 12px;
+	background-color: rgba(0, 0, 0, 0.05);
+`;
+
+export const MemberListContainer = styled.li`
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 20px;
+	padding: 20px;
+`;
+
+export const SearchContainer = styled.li`
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding: 20px;
+`;
+
+export const EventDetail = styled.p`
+	font-size: 18px;
+`;
+
+export const EventDetailMain = styled.p`
+	font-weight: 600;
+`;
+
+export const SearchField = styled.input`
+	width: 250px;
+	height: 40px;
+	padding: 0 10px;
+	border-radius: 8px;
+	border: 1px solid black;
+	font-size: 18px;
+`;
+
+export const MemberList = styled.ol`
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 15px;
+	margin-left: 40px;
+	font-size: 20px;
+`;
+
+export const MemberListInfo = styled.span`
+	display: flex;
+	gap: 5px;
+	margin-bottom: 5px;
+`;
+
+export const MemberListInfoTitle = styled.span`
+	font-weight: 600;
+`;
+
+export const ButtonReset = styled.button`
+	width: 38px;
+	height: 38px;
+	padding: 0 10px;
+	border-radius: 8px;
+	border: 0.5px solid black;
+	cursor: pointer;
+
+	&:hover {
+		background-color: blanchedalmond;
+	}
+`;
+
+export const IconClose = styled(Icon)`
+	width: 24px;
+	height: 24px;
+	stroke: black;
 `;

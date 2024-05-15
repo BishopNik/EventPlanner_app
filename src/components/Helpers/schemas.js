@@ -13,7 +13,3 @@ export const registerSchema = Yup.object().shape({
 	dateBth: Yup.string().required('This is a required field'),
 	hear: Yup.string().required('This is a required field'),
 });
-
-export const searchSchema = Yup.object().shape({
-	name: Yup.string().required('This is a required field'),
-});
