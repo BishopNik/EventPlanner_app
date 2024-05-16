@@ -22,8 +22,11 @@ import {
 	ButtonReset,
 	IconClose,
 	ButtonBox,
+	ChartContainer,
+	ChartTitle,
 } from 'components/styled.components/EventPage.styled';
 import { fetchMembers } from 'helpers/fetchMembers';
+import Chart from 'components/Chart';
 
 function EventPage() {
 	const navigate = useNavigate();
@@ -106,6 +109,10 @@ function EventPage() {
 								{moment(eventData?.dates[0].end * 1000).format('HH:MM DD.MM.YYYY')}
 							</EventDetail>
 						</EventInfoContainer>
+						<ChartContainer>
+							<ChartTitle>Member per days</ChartTitle>
+							<Chart memberList={memberList} />
+						</ChartContainer>
 						<ButtonBox>
 							<ButtonStyled type='button' onClick={goHome}>
 								Home
@@ -170,9 +177,6 @@ function EventPage() {
 						</ul>
 					</MemberListContainer>
 				</DataContainer>
-				<div>
-					<h2>Bar chart</h2>
-				</div>
 			</main>
 		)
 	);

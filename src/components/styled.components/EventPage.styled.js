@@ -136,3 +136,11 @@ export const IconClose = styled(Icon)`
 	height: 24px;
 	stroke: black;
 `;
+
+export const ChartContainer = styled.div`
+	margin-bottom: 30px;
+`;
+
+export const ChartTitle = styled.h2`
+	text-align: center;
+`;
