@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toastError } from './toastwindow';
 
 const kudagoAPI = axios.create({
-	baseURL: 'https://eventplanner-api.onrender.com//api/events',
+	baseURL: 'https://eventplanner-api.onrender.com/api/events',
 });
 
 export const fetchEvents = async page => {
