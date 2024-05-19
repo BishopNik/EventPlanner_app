@@ -119,9 +119,12 @@ export const MemberListInfoTitle = styled.span`
 `;
 
 export const ButtonReset = styled.button`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 38px;
 	height: 38px;
-	padding: 0 10px;
+
 	border-radius: 8px;
 	border: 0.5px solid black;
 	cursor: pointer;
